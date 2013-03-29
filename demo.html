@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" media="all" href="growthchart.css" />
+<body>
+  <script src="d3.min.js"></script>
+  <script src="underscore-min.js"></script>
+  <script src="growthchart.js"></script>
+  <script>
+  var patientGrowth = [
+    {"age": 5.27, "weight": 7.4},
+    {"age": 6.17, "weight": 7.2},
+    {"age": 6.9, "weight": 7.3},
+    {"age": 8.03, "weight": 7.0},
+    {"age": 9.37, "weight": 7.2},
+    {"age": 12, "weight": 6.4},
+    {"age": 12.53, "weight": 6.4},
+    {"age": 13.7, "weight": 6.7},
+    {"age": 14.83, "weight": 6.8},
+    {"age": 16.67, "weight": 6.8},
+    {"age": 17.9, "weight": 7.7},
+    {"age": 19.3, "weight": 7.9},
+    {"age": 22.23, "weight": 7.5},
+    {"age": 24.2, "weight": 8.2},
+    {"age": 26.07, "weight": 9.6},
+    {"age": 28.4, "weight": 9.5},
+  ];
+  var patient = patientGrowth;
+  var chartType = 'wfa_haiti_0_to_5';
+	var el = 'body';
+
+	var myConfig = {
+		height: 320,
+  	padding: 40,
+	};
+  var growthChart = display_growth_chart(patient, el , chartType, myConfig);
+
+  function drawChangeGraphButton(){
+	  // Button to toggle chart type
+		var rectGroup = svg.append("g")
+			.attr("class", "button button-change-graph");
+
+		var rectButton = rectGroup.append("rect")
+			.attr("rx", 6)
+			.attr("ry", 6)
+			.attr("x", (width - 80))
+			.attr("y", (myConfig.padding / 2) - 17)
+			.attr("width", 101)  // 106
+			.attr("height", 25)
+			.style("stroke","gray")
+			.style("fill", d3.scale.category20c())
+			.on("click", changeGraphType);
+
+		var rectButtonText = rectGroup.append("text")
+			.attr("x", (width - 30))
+			.attr("y", (myConfig.padding / 2))
+			.attr("text-anchor", "middle")
+			.style("font-size","14px")
+			.style("fill","white")
+			.text("Change Graph")
+			.on("click", changeGraphType);
+		};
+
+
+  function changeGraphType() {
+    var whichChart = chartTypeKeys.indexOf(chartType);
+    whichChart += 1;
+    whichChart %= chartTypeKeys.length;
+
+		chartType = chartTypeKeys[whichChart];
+    growthChart = display_growth_chart(patient, el , chartType, myConfig);
+    drawChangeGraphButton();
+  }
+   drawChangeGraphButton();
+  </script>
+</body>
+</html>
