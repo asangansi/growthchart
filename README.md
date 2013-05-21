@@ -9,7 +9,7 @@ Demo:
 
 Screenshot:
 
-![Example](https://raw.github.com/nathanleiby/growthchart/gh-pages/screenshot/growthChart_0_to_5.png)
+![Example](https://raw.github.com/ewheeler/growthchart/master/screenshot/growthChart_0_to_5.png)
 
 Ideas:
 
